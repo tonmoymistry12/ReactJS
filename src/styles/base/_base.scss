@@ -1,0 +1,30 @@
+html{
+    font-size: 62.5%; //making 1rem to 10px
+}
+body {
+    //background: $dark-blue;
+    background: url(/images/bg-pattern.png), linear-gradient(to left,#7b4397,#dc2430);
+    font-family: 'Lato',sans-serif;
+    font-size: $m-size; //16px
+}
+ button {
+     cursor: pointer;
+ }
+
+ button:disabled {
+     cursor: default;
+ }
+
+ .is-active {
+  font-weight: bold;
+ }
+ button, input, optgroup, select, textarea 
+ {
+    font-family: 'Lato',sans-serif;
+}
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}

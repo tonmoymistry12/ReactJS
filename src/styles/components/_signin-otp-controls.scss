@@ -1,0 +1,59 @@
+.otp-input{
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem 0;
+    justify-content: center;
+
+    input{
+        width: 4.5rem !important;
+        height: 5rem;
+        color: #fff;
+        border: 1px solid #ffffff;
+        border-radius: 5px;
+        background-color: #333745;
+        &:focus{
+            // padding: 10px 5px 10px 10px;
+            outline: 0;
+            border-color: #FF7052;
+          }
+    }
+    span{
+        color:#fff;
+        margin: 0 0.4rem;
+    }
+}
+.slidingpanelforsignin{
+    width: 100% !important;
+    background: url(/images/bg-pattern.png), linear-gradient(to left, #7b4397, #dc2430);
+}
+
+.slide-pane__header{
+    background: #ebebeb00;
+    border-bottom: none;
+}
+
+.button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .button:hover span {
+    padding-right: 25px;
+  }
+  
+  .button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }

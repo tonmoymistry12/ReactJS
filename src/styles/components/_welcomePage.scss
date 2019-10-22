@@ -1,0 +1,219 @@
+
+  .desc_wrapper{
+    display: flex; 
+  }
+  .welcome_decription{
+    display: inline-block;
+    flex: 2;
+    padding: 0 3rem;
+    line-height: 2.2rem;
+
+    ul li{
+      text-indent: -1em;
+      margin-left: 1em;
+      }
+
+      b{
+        color: #bfc12c;
+      }
+  }
+  .welcome_decription_right{
+    
+    flex: 1;
+    padding: 0 3rem;
+    line-height: 2.2rem;
+    img{
+      width: 100%;
+      margin-top:$xl-size;
+      
+    }
+    
+    h2{
+      color: #bfc12c;
+    }
+  }
+  .bullet{
+    color: #bfc12c;
+  }
+  
+  .set_margin_fromTop{
+    margin-top:3rem;
+  }
+  .animate-reveal {
+    font-size: 2rem;
+    color:#fff;
+    letter-spacing: 2px;
+    opacity: 0;
+    -webkit-animation: reveal 1s cubic-bezier(0, 1, 0.5, 1) 1 normal forwards;
+       -moz-animation: reveal 1s ease-in 1 normal forwards;
+         -o-animation: reveal 1s cubic-bezier(0, 1, 0.5, 1) 1 normal forwards;
+            animation: reveal 1s cubic-bezier(0, 1, 0.5, 1) 1 normal forwards;
+    
+      
+          
+  }
+  ul , li ,p.animate-reveal{
+    color:#fff;
+    font-size: 1.5rem;
+  }
+
+  .list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color:#fff;
+    font-size: 1.8rem;
+  }
+  
+  .list li {
+    position: relative;
+    margin-bottom: 10px;
+  }
+
+
+
+  
+  .animate-first {
+    -webkit-animation-delay: 0;
+       -moz-animation-delay: 0;
+         -o-animation-delay: 0;
+            animation-delay: 0;
+  }
+  
+  .animate-second {
+    -webkit-animation-delay: 500ms;
+       -moz-animation-delay: 500ms;
+         -o-animation-delay: 500ms;
+            animation-delay: 500ms;
+  }
+  
+  .animate-third {
+    -webkit-animation-delay: 1s;
+       -moz-animation-delay: 1s;
+         -o-animation-delay: 1s;
+            animation-delay: 1s;
+  }
+  
+  @-webkit-keyframes reveal {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateY(100%);
+         -moz-transform: translateY(100%);
+           -o-transform: translateY(100%);
+              transform: translateY(100%);
+    }
+    100% {
+      opacity: 1;
+      -webkit-transform: translateY(0);
+         -moz-transform: translateY(0);
+           -o-transform: translateY(0);
+              transform: translateY(0);
+    }
+  }
+  
+  @-moz-keyframes reveal {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateY(100%);
+         -moz-transform: translateY(100%);
+           -o-transform: translateY(100%);
+              transform: translateY(100%);
+    }
+    100% {
+      opacity: 1;
+      -webkit-transform: translateY(0);
+         -moz-transform: translateY(0);
+           -o-transform: translateY(0);
+              transform: translateY(0);
+    }
+  }
+  
+  @-o-keyframes reveal {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateY(100%);
+         -moz-transform: translateY(100%);
+           -o-transform: translateY(100%);
+              transform: translateY(100%);
+    }
+    100% {
+      opacity: 1;
+      -webkit-transform: translateY(0);
+         -moz-transform: translateY(0);
+           -o-transform: translateY(0);
+              transform: translateY(0);
+    }
+  }
+  
+  @keyframes reveal {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateY(100%);
+         -moz-transform: translateY(100%);
+           -o-transform: translateY(100%);
+              transform: translateY(100%);
+    }
+    100% {
+      opacity: 1;
+      -webkit-transform: translateY(0);
+         -moz-transform: translateY(0);
+           -o-transform: translateY(0);
+              transform: translateY(0);
+    }
+  }
+  .startbuttonDiv{
+    position: absolute;
+    bottom: 1rem;
+    width:100%;
+    text-align: center;
+  }
+  .getStarted{
+    
+    border-bottom: none;
+    border-radius: 0.5rem;
+    width: 18rem;
+    font-family: 'Lato',sans-serif;
+  }
+  .frd-src{
+   text-align: center;
+  }
+
+  
+/* make keyframes that tell the start state and the end state of our object */
+@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+.fade-in {
+  opacity:0;  /* make things invisible upon start */
+  -webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+  -moz-animation:fadeIn ease-in 1;
+  animation:fadeIn ease-in 1;
+
+  -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
+
+  -webkit-animation-duration:1s;
+  -moz-animation-duration:1s;
+  animation-duration:1s;
+}
+
+.fade-in.one {
+  -webkit-animation-delay: 0.7s;
+  -moz-animation-delay: 0.7s;
+  animation-delay: 0.7s;
+}
+
+// .loading {
+//   animation: rotation 90s infinite linear;
+// }
+
+// @keyframes rotation {
+//   from {
+//       -webkit-transform: rotate(0deg);
+//   }
+//   to {
+//       -webkit-transform: rotate(359deg);
+//   }
+// }

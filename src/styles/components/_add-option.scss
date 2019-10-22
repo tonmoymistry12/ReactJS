@@ -1,0 +1,73 @@
+//Add option error
+.add-option-error{
+    color: $off-white;
+    font-style: italic;
+    margin: $m-size 0 0 0;
+    padding: 0 $m-size;
+}
+
+//Add option
+.add-option {
+    display: block;
+    padding: $m-size;
+    min-height: 25rem;
+    border-top: 1px solid lighten($light-blue, 10%);
+    border-bottom: 1px solid lighten($light-blue, 10%);
+    background: #24263061;
+}
+
+.input{
+    position: relative;
+    width: 90%;
+    margin: 15px auto;
+    
+    span{
+      position: absolute;
+      display: block;
+      color: darken(#EDEDED, 10%);
+      left: 10px;
+      top: 5px;
+      font-size: 20px;
+    }
+    
+    input{
+      background: $dark-blue;  
+      width: 100%;
+      padding: 10px 5px 10px 40px;
+      display: block;
+      border: 1px solid #EDEDED;
+      border-radius: 4px;
+      transition: 0.2s ease-out;
+      color: darken(#EDEDED, 30%);
+      margin-bottom: 3.6rem;
+      &:focus{
+        // padding: 10px 5px 10px 10px;
+        outline: 0;
+        border-color: #FF7052;
+      }
+    }
+  }
+  .remember-forgot{
+      display: flex;
+      margin: 0px 2.3rem;
+      justify-content: space-between;
+  }
+  .remember{
+    display: flex;
+    input{
+        display: inline-block;
+        margin-right: 10px;
+        margin-top: 0.7rem;
+    }
+    label{
+        color: #a5afd7;
+    }
+  }
+  .forgot{
+    display: flex;
+  }
+
+@media (min-width: $desktop-breakpoint){
+    
+       
+}

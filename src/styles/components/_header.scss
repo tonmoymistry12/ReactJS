@@ -1,0 +1,23 @@
+.header {
+    //background: #000000a8;
+    color:white;
+    padding: $m-size 0;
+}
+
+.header__title {
+    font-size: $l-size;
+    margin: 0;
+    text-align: center;
+}
+
+.header__subtitle {
+    color: #fff;
+    font-size: $m-size;
+    font-weight: 500;
+    margin: 5px;
+    text-align: center;
+}
+
+@media (min-width: $desktop-breakpoint){
+    
+}

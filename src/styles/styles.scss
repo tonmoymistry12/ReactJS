@@ -1,0 +1,17 @@
+@import './base/settings';
+@import './base/base';
+@import './components/add-option';
+@import './components/button';
+@import './components/header';
+@import './components/signin-otp-controls';
+@import './components/widget';
+@import './components/welcomePage';
+
+@font-face {
+    font-family: 'Lato';
+    font-style: sans-serif;
+    font-weight: 400;
+    src:url('/fonts/Lato-Regular.ttf') format('truetype');
+        
+ }
+
