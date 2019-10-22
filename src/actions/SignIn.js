@@ -16,9 +16,11 @@ export const login = (loginData = {
             password: loginData.password
         };
  
-        return axios.post('https://reqres.in/api/users/2', login).then(result => {
-            dispatch(_signin(result.data));
-        });
+        return axios.post('https://reqres.in/api/login', login)
+        // .then(result => {
+        //     dispatch(_signin(result.data));
+            
+        // });
     };
 };
  

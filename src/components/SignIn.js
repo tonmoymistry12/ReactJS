@@ -59,10 +59,10 @@ class SignIn extends React.Component {
    onSubmit = e => {
     e.preventDefault();
     this.props.login(this.state).then(
-        ()=> this.context.router.push('/'),
-        (err) => this.setState({errors: err.data.errors})
+        (res)=> {console.log(res)},
+        (err) => {console.log(err)}
     );
-    this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
+    //this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
     
    }
     
