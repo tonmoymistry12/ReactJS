@@ -20,7 +20,8 @@ class SignIn extends React.Component {
         password:'',
         otp:'',
         validEmail: false,
-        errors :''
+        errors :'',
+        token:''
 
             };
       this.onSubmit = this.onSubmit.bind(this); 
@@ -59,8 +60,8 @@ class SignIn extends React.Component {
    onSubmit = e => {
     e.preventDefault();
     this.props.login(this.state).then(
-        (res)=> {console.log(res)},
-        (err) => {console.log(err)}
+        (res)=> {this.setState({token:res.data.token})},
+        (err) => {this.setState({errors:err.data})}
     );
     //this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
     
