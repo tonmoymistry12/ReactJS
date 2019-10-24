@@ -1,3 +1,8 @@
+$green: #7ac142;
+$white: #fff;
+// Misc
+$curve: cubic-bezier(0.650, 0.000, 0.450, 1.000);
+
 html{
     font-size: 62.5%; //making 1rem to 10px
 }
@@ -24,7 +29,101 @@ body {
 }
 button:disabled,
 button[disabled]{
-    border: 1px solid #999999;
-    background-color: #252121bf;
-    color: #f3e7e7;
+    border: 1px solid #999999 !important;
+    background-color: #252121bf !important;
+    color: #f3e7e7 !important;
 }
+.loaderAdj{
+    display: inline-block;
+    
+    
+}
+.icon-spin {
+    -webkit-animation: icon-spin 2s infinite linear;
+            animation: icon-spin 2s infinite linear;
+  }
+  
+  @-webkit-keyframes icon-spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(359deg);
+              transform: rotate(359deg);
+    }
+  }
+  
+  @keyframes icon-spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(359deg);
+              transform: rotate(359deg);
+    }
+  }
+  .shown{
+    display: inline-block;
+    svg{
+      margin-right: 0.5rem;
+      color: #0ac37f;
+      font-weight: 700;
+      margin-top: -0.3rem;
+  }
+  }
+  .hidden{
+    display: none;
+  }
+
+  .checkmark {
+    height: 1.8rem;
+    border-radius: 50%;
+    display: inline-block;
+    stroke-width: 2;
+    stroke: $white;
+    stroke-miterlimit: 10;
+    box-shadow: inset 0px 0px 0px $green;
+    animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+  }
+  
+  .checkmark__circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    stroke: $green;
+    fill: none;
+    animation: stroke .6s $curve forwards;
+  }
+  
+  .checkmark__check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: stroke .3s $curve .8s forwards;
+  }
+  
+  @keyframes stroke {
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+  
+  @keyframes scale {
+    0%, 100% {
+      transform: none;
+    }
+    50% {
+      transform: scale3d(1.1, 1.1, 1);
+    }
+  }
+  
+  @keyframes fill {
+    100% {
+      box-shadow: inset 0px 0px 0px 30px $green;
+    }
+  }
+
+  

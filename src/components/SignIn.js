@@ -10,7 +10,8 @@ import SignInInputControls from './SignInInputControls';
 import SignInOtpControls from './SignInOtpControls';
 import WelcomePage from './WelcomePage';
 import { ProgressBar, Step } from "react-step-progress-bar";
-
+import { faCircleNotch, faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class SignIn extends React.Component {
    
@@ -27,6 +28,9 @@ class SignIn extends React.Component {
         errors :'',
         token:'',
         onOtpscreen:false,
+        isLoader:false,
+        onSuccess : false,
+        onFail: false
         };
       this.onSubmit = this.onSubmit.bind(this); 
       this.userDetails = this.userDetails.bind(this);
@@ -63,13 +67,30 @@ class SignIn extends React.Component {
    
    onSubmit = e => {
     e.preventDefault();
+    this.setState({isLoader : true},()=>{});
+    this.setState({validEmail : false},()=>{});
     this.props.login(this.state).then(
+        
         (res)=> {
-            this.setState({token:res.data.token});
-            this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
-            this.setState({onOtpscreen:true}, ()=>{});
+            this.setState({isLoader : false},()=>{});
+            this.setState({onSuccess : true},()=>{
+              //adding delay for animation effect
+              setTimeout(() => {
+                this.setState({token:res.data.token});
+                this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
+                this.setState({onOtpscreen:true}, ()=>{
+                    this.setState({onSuccess : false},()=>{})
+                });
+              }, 2000);
+            });
+            
         },
-        (err) => {this.setState({errors:err.data})}
+        (err) => {
+                   this.setState({isLoader : false},()=>{});
+                   this.setState({errors:err.data});
+                   this.setState({onFail : true},()=>{})
+                
+                }
     );
     
     
@@ -141,7 +162,33 @@ class SignIn extends React.Component {
                 
                 </ReactCardFlip>
                 <div className ="widget-button">
-                    <button className="button" onClick={ this.onSubmit } disabled={!this.state.validEmail}>Login</button>
+                    <button  
+                    onClick={ this.onSubmit } 
+                    disabled={!this.state.validEmail}>
+                    <span 
+                         className="loaderAdj" 
+                         className={ this.state.isLoader ==true ? 'shown' : 'hidden' }
+                    >
+                        <FontAwesomeIcon 
+                         className="icon-spin" 
+                         icon={faCircleNotch} 
+                        />
+                    </span>
+                   
+                    <span 
+                         className="loaderAdj" 
+                         className={ this.state.onSuccess ==true ? 'shown' : 'hidden' }
+                    >
+                    <svg 
+                    className="checkmark" 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    viewBox="0 0 52 52">
+                    <circle className="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                    </svg>
+                    </span>
+                    {this.state.onOtpscreen == false ? 'SIGN IN':'SUBMIT'}
+                    </button>
                     
                 </div>
                 

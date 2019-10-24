@@ -26,7 +26,7 @@
   height: 0.2rem;
 }
 .RSPBprogression{
-  background: linear-gradient(to right, rgb(218, 89, 116), rgb(187, 9, 44)) !important;
+  background: linear-gradient(to right, #00d02d, #015d3b) !important;
 }
 
 //widget Header
@@ -55,6 +55,12 @@
       width: 93%;
       margin: 3rem 1.4rem;
       border-radius: 0.5rem;
+      padding: 1.2rem 0;
+      border: none;
+      border-bottom: 0.3rem solid #693cad;
+      background: #8357c5;
+      color: #fff;
+    
     }
     .button__link{
         text-align: left;
