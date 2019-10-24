@@ -28,6 +28,7 @@ class SignInInputControls extends React.Component {
                           type="email" 
                           placeholder="Email"  
                           name="email" 
+                          autocomplete="off"
                           value={this.state.email} 
                           onChange={this.onChange}
                           
@@ -41,7 +42,7 @@ class SignInInputControls extends React.Component {
                           placeholder="Password" 
                           name="password" 
                           value={this.state.password} 
-                          onInput={this.onChange}/>
+                          onChange={this.onChange}/>
                     <span><FontAwesomeIcon icon={faLock} /></span>
                     </div>
                     <div className ="remember-forgot">

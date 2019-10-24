@@ -20,6 +20,13 @@
  color: $off-white;
  margin: 0;
  text-align: center;
+ padding: 0.5rem 10rem 2.8rem 10rem;
+}
+.RSPBprogressBar{
+  height: 0.2rem;
+}
+.RSPBprogression{
+  background: linear-gradient(to right, rgb(218, 89, 116), rgb(187, 9, 44)) !important;
 }
 
 //widget Header
@@ -54,43 +61,3 @@
     }
 }
 
-.widget-header_progress{
-    padding:0;
-
-   li {
-       width: 1.8rem;
-       height: 1.8rem;
-       text-align: center;
-       line-height: 1.5em;
-       font-size: 1.2rem;
-       border-radius: 1em;
-       background: dodgerblue;
-       margin: 0 2rem;
-       display: inline-block;
-       color: white;
-       position: relative;
-     }
-     
-     li::before{
-       content: '';
-       position: absolute;
-       top: .8rem;
-       left: -4rem;
-       width: 4rem;
-       height: .1rem;
-       background: dodgerblue;
-       z-index: 0;
-     }
-     li:first-child::before {
-       display: none;
-     }
-     .active {
-       background: #8357c5;
-     }
-     .active ~ li {
-       background: lightblue;
-     }
-     .active ~ li::before {
-       background: lightblue;
-     }
-}
