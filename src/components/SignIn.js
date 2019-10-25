@@ -127,7 +127,7 @@ class SignIn extends React.Component {
           {({ accomplished }) => (
             <img
               style={{ filter: `grayscale(${accomplished ? 0 : 80}%)` }}
-              width="16"
+              width="20"
               src="/images/number-1.png"
             />
           )}
@@ -136,7 +136,7 @@ class SignIn extends React.Component {
           {({ accomplished }) => (
             <img
               style={{ filter: `grayscale(${accomplished ? 0 : 80}%)` }}
-              width="16"
+              width="20"
               src="/images/number-2.png"
             />
           )}
@@ -145,7 +145,7 @@ class SignIn extends React.Component {
           {({ accomplished }) => (
             <img
               style={{ filter: `grayscale(${accomplished ? 0 : 80}%)` }}
-              width="16"
+              width="20"
               src="/images/number-3.png"
             />
           )}
