@@ -30,7 +30,8 @@ class SignIn extends React.Component {
         onOtpscreen:false,
         isLoader:false,
         onSuccess : false,
-        onFail: false
+        onFail: false,
+        maskEmail: ''
         };
       this.onSubmit = this.onSubmit.bind(this); 
       this.userDetails = this.userDetails.bind(this);
@@ -74,6 +75,23 @@ class SignIn extends React.Component {
         (res)=> {
             this.setState({isLoader : false},()=>{});
             this.setState({onSuccess : true},()=>{
+                //code for email masking
+                  //code for email masking start// 
+                        let maskid ="";
+                        let email = this.state.userName;
+                        let prefix = email.substring(0, email.lastIndexOf("@"));
+                        let postfix= email.substring(email .lastIndexOf("@"));
+                        for(var i=0; i<prefix.length; i++){
+                                if(i == 0 || i == prefix.length - 1 || i == 1 || i == prefix.length - 2) {
+                                    
+                                    maskid = maskid + prefix[i].toString();
+                                }
+                                else {
+                                    maskid = maskid + "*";
+                                }
+                            }
+                        this.setState({maskEmail : maskid + postfix},()=>{});
+                   //email masking ends
               //adding delay for animation effect
               setTimeout(() => {
                 this.setState({token:res.data.token});
@@ -99,8 +117,10 @@ class SignIn extends React.Component {
     render() {
        return (
            
-           <div ref={ref => this.el = ref}>
+           <div  ref={ref => this.el = ref}>
+          
            
+       
             <SlidingPane
             className='slidingpanelforsignin '
             overlayClassName='some-custom-overlay-class'
@@ -158,7 +178,7 @@ class SignIn extends React.Component {
                 flipSpeedBackToFront={2}
                 flipSpeedFrontToBack={2}>
                 <SignInInputControls key="front" signInFirstPage={this.userDetails}> </SignInInputControls>
-                <SignInOtpControls key="back"></SignInOtpControls>
+                <SignInOtpControls key="back" getEmailOfUser={this.state.maskEmail}></SignInOtpControls>
                 
                 </ReactCardFlip>
                 <div className ="widget-button">
@@ -184,7 +204,7 @@ class SignIn extends React.Component {
                     xmlns="http://www.w3.org/2000/svg" 
                     viewBox="0 0 52 52">
                     <circle className="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
-                    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                    <path className="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
                     </svg>
                     </span>
                     {this.state.onOtpscreen == false ? 'SIGN IN':'SUBMIT'}
@@ -203,6 +223,7 @@ class SignIn extends React.Component {
            <div className="startbuttonDiv">
            <button className="button getStarted" onClick={() => this.setState({ isPaneOpen: true })}><span>Get Started!</span></button>
            </div>
+           
            </div>
             
         );
