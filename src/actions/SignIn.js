@@ -23,8 +23,9 @@ export const login = (loginData = {
         return axiosInstance({
             url: 'http://localhost:8081/auth?ts=1571936819267',
             method: 'post',
+            data:{},
             headers: {
-                
+
                 'X-Auth-Password': sha256(loginData.password),
                 'X-Auth-Username':loginData.userName,
                 'Content-Type': 'application/json'
