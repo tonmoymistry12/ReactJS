@@ -62,7 +62,6 @@ const _otpCheck = (data) => ({
 });
 
 export const otpCheck = (otpData = {}) =>{
-    debugger;
     return (dispatch,getState) => {
         let store = getState();
         const data = {
