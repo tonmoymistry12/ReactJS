@@ -1,50 +1,49 @@
 import React from 'react';
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-class SignInInputControls extends React.Component {
-  constructor() {
+class SignInInputControls extends React.Component 
+{
+  constructor() 
+  {
     super();
       this.state = {
       email: '',
       password: ''
     };
     this.onChange = this.onChange.bind(this);
-    
   } 
 
-  onChange(e){
+  onChange(e)
+  {
     this.setState({ [e.target.name] : e.target.value},()=>{
       this.props.signInFirstPage(this.state);
-      
     });
-    
   }
 
-  render(){
-       return (
+  render()
+  {
+    return (
             <div className="add-option">
                     <div className="input">
-                    <input 
-                          className="add-option__input" 
-                          type="email" 
-                          placeholder="Email"  
-                          name="email" 
-                          autocomplete="off"
-                          value={this.state.email} 
-                          onChange={this.onChange}
-                          
-                    />
-                    <span><FontAwesomeIcon icon={faEnvelope} /></span>
+                      <input 
+                            className="add-option__input" 
+                            type="email" 
+                            placeholder="Email"  
+                            name="email" 
+                            value={this.state.email} 
+                            onChange={this.onChange}
+                      />
+                      <span><FontAwesomeIcon icon={faEnvelope} /></span>
                     </div>
                     <div className="input">
-                    <input 
-                          className="add-option__input" 
-                          type="password" 
-                          placeholder="Password" 
-                          name="password" 
-                          value={this.state.password} 
-                          onChange={this.onChange}/>
-                    <span><FontAwesomeIcon icon={faLock} /></span>
+                      <input 
+                            className="add-option__input" 
+                            type="password" 
+                            placeholder="Password" 
+                            name="password" 
+                            value={this.state.password} 
+                            onChange={this.onChange}/>
+                      <span><FontAwesomeIcon icon={faLock} /></span>
                     </div>
                     <div className ="remember-forgot">
                         <div className="remember">
@@ -56,9 +55,9 @@ class SignInInputControls extends React.Component {
                         </div>
                     </div>
                     
-                   </div>
-        );
-      }
+                </div>
+             );
+  }
 }
 
 

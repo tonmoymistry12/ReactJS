@@ -10,11 +10,13 @@ import OtpInput from "react-otp-input";
             useremail:''
         };
         this.handleChange.bind(this);
-        
       }
     
-      handleChange= value => {
-        this.setState({ value });
+      handleChange = value => {
+        this.setState({ value },()=>{
+          this.props.data(this.state.value)
+        });
+        
       };
      
     

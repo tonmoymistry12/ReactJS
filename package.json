@@ -51,6 +51,8 @@
     "webpack-dev-server": "2.5.1"
   },
   "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-plugin-react": "^7.16.0",
     "react-card-flip": "^0.8.1",
     "url-loader": "^2.2.0"
   }

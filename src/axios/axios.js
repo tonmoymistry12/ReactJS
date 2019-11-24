@@ -1,29 +1,29 @@
 import axios from 'axios';
-import CryptoJS from 'crypto-js'
-/* export default axios.create({
-    baseURL: 'http://localhost:8080/api'
-}); */
-
+import CryptoJS from 'crypto-js';
 const axiosInstance = axios.create({
     baseURL: 'localhost:8080'
   })
-/*   axiosInstance.interceptors.request.use(
-    request => requestHandler(request)
-  );
-  axiosInstance.interceptors.response.use(
-    response => successHandler(response),
-    error => errorHandler(error)
-  ) */
+  let tokenInfo ={} 
+
 axiosInstance.interceptors.request.use(config => {
     // perform a task before the request is sent
+    
+    let url = new URL(config.url);
+    let pathName = url.pathname;
+    if(pathName != '/auth'){
+        let headers =  {
+                    'X-Auth-Token': tokenInfo.authToken,
+                    'x-csrf-token': tokenInfo.csrfToken,
+                    'Content-Type': 'application/json'
+                 }
+         config.headers = headers;
+    }
 
-    let encryptkey = 0;
-    let getencryptkey = 0;
     function generateChecksum(str){
 					
         let checksum =0;
         let i;
-        let x
+        let x;
         let hexValue;
         let carry;
         for(i=0;i<str.length-2;i=i+2){
@@ -44,7 +44,8 @@ axiosInstance.interceptors.request.use(config => {
             x = str.charCodeAt(i+1);
             hexValue = hexValue + Number(x).toString(16);
             x = parseInt(hexValue, 16);
-        }else{
+        }
+        else {
             // If number of characters is odd, last 2 digits will be 00.
             x = str.charCodeAt(i);
             hexValue = "00" + Number(x).toString(16);
@@ -70,31 +71,22 @@ axiosInstance.interceptors.request.use(config => {
     }
 
     if(typeof config.data != 'undefined'){
-        console.log(config)
+        
         let url= config.url.replace("http://localhost:8081", "");
-        //let url = config.url;
-        console.log(url)
         if(url.charAt(0) != '/'){
             url = "/"+url;
-            console.log("1st If")
-            console.log(url)
         }
         //url = /a/b/c?ts=m&orgId=NPCI&loginUser=A
-        var urlArray = url.split("?");
-        console.log(urlArray)
-        var pathParam;
+        let urlArray = url.split("?");
+        let pathParam;
         if(urlArray.length==1){
             url = urlArray[0]; // /a/b/c
-            console.log("length")
-            console.log(url)
             pathParam = null;
         }else{
            
             pathParam = null;
             url = urlArray[0];// /a/b/c
             pathParam = urlArray[1];  // ts=m&orgId=NPCI&loginUser=A
-            console.log(" Not length")
-            console.log(url)
         }
         
         var checkSumOfPathParam = 0;
@@ -109,9 +101,9 @@ axiosInstance.interceptors.request.use(config => {
         
         
         if(typeof config.params != 'undefined'){
-            var checkSumOfOptionalPathParam = 0;
-            var myObj = config.params;
-            for (var key in myObj) {
+            let checkSumOfOptionalPathParam = 0;
+            let myObj = config.params;
+            for (let key in myObj) {
                   if(typeof myObj[key] == 'undefined' || myObj[key] == null ){
                          continue;
                   }
@@ -134,22 +126,32 @@ axiosInstance.interceptors.request.use(config => {
         else{
             myJSON = JSON.stringify(config.data);
         }
-        
-        console.log(url)
-        console.log(myJSON)
-        var urlPlusPayloadCheckSum = generateChecksum(url+myJSON);
-        var finalCheckSum = parseInt(urlPlusPayloadCheckSum) + parseInt(checkSumOfPathParam);
+        let urlPlusPayloadCheckSum = generateChecksum(url+myJSON);
+        let finalCheckSum = parseInt(urlPlusPayloadCheckSum) + parseInt(checkSumOfPathParam);
        
         config.headers.checksum=CryptoJS.AES.encrypt(finalCheckSum.toString(), "Secret Passphrase");
-        console.log(finalCheckSum)
-        console.log(config.headers.checksum);
     }
-  
-    console.log('Request was sent');
+    
     return config;
     
   }, error => {
-    // handle the error
     return Promise.reject(error);
   });
+
+
+  axiosInstance.interceptors.response.use(response => {
+    
+    let url = new URL(response.config.url);
+    let pathName = url.pathname;
+    if(pathName == '/auth'){
+        tokenInfo.authToken = response.data.token;
+        tokenInfo.csrfToken = response.headers['csrf-token'];
+    } 
+    return response
+  }, error => {
+    return Promise.reject(error);
+  })
+ 
+
+
   export default axiosInstance;

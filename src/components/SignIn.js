@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { login } from '../actions/SignIn';
+import { login, emailCheck, otpCheck } from '../actions/SignIn';
 import ReactCardFlip from 'react-card-flip';
 import Modal from 'react-modal';
 import SlidingPane from 'react-sliding-pane';
@@ -10,7 +10,7 @@ import SignInInputControls from './SignInInputControls';
 import SignInOtpControls from './SignInOtpControls';
 import WelcomePage from './WelcomePage';
 import { ProgressBar, Step } from "react-step-progress-bar";
-import { faCircleNotch, faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class SignIn extends React.Component {
@@ -35,7 +35,7 @@ class SignIn extends React.Component {
         };
       this.onSubmit = this.onSubmit.bind(this); 
       this.userDetails = this.userDetails.bind(this);
-      
+      this.otpDetails = this.otpDetails.bind(this);
     }
      
     componentDidMount() {
@@ -43,74 +43,90 @@ class SignIn extends React.Component {
     }
     
 
-    userDetails(data){
+    userDetails(data)
+    {
         
-    this.setState({userName: data.email, password:data.password }, ()=>{
-    const regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;   
-    const validEmail = regexp.test(this.state.userName);
-    const ValidPassword = this.state.password;
-    if(validEmail & ValidPassword.length>3){
-    this.setState({validEmail : true},()=>{});
-    }
-    else{
-    this.setState({validEmail : false},()=>{});
-    }
+        this.setState({userName: data.email, password:data.password }, ()=>{
+        const regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;   
+        const validEmail = regexp.test(this.state.userName);
+        const ValidPassword = this.state.password;
+        if(validEmail & ValidPassword.length>3){
+        this.setState({validEmail : true},()=>{});
+        }
+        else{
+        this.setState({validEmail : false},()=>{});
+        }
 
-    });
+        });
 
-    //block for otp screen on success
-    if(false){
-     this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
-    }
+        //block for otp screen on success
+        if(false){
+        this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
+        }
        
    }
   
-   
+   otpDetails(value)
+   {
+     this.setState({otp : value},()=>{});
+   }
+
    onSubmit = e => {
     e.preventDefault();
-    this.setState({isLoader : true},()=>{});
-    this.setState({validEmail : false},()=>{});
-    this.props.login(this.state).then(
-        
-        (res)=> {
-            this.setState({isLoader : false},()=>{});
-            this.setState({onSuccess : true},()=>{
-                //code for email masking
-                  //code for email masking start// 
-                        let maskid ="";
-                        let email = this.state.userName;
-                        let prefix = email.substring(0, email.lastIndexOf("@"));
-                        let postfix= email.substring(email .lastIndexOf("@"));
-                        for(var i=0; i<prefix.length; i++){
-                                if(i == 0 || i == prefix.length - 1 || i == 1 || i == prefix.length - 2) {
-                                    
-                                    maskid = maskid + prefix[i].toString();
+    //For 1st login screen
+    if(this.state.onOtpscreen==false){
+        this.setState({isLoader : true},()=>{});
+        this.setState({validEmail : false},()=>{});
+        this.props.login(this.state).then(
+            (res)=> {
+                this.setState({isLoader : false},()=>{});
+                this.setState({onSuccess : true},()=>{
+                    this.props.emailCheck(this.state.userName);
+                    //code for email masking
+                      //code for email masking start// 
+                            let maskid ="";
+                            let email = this.state.userName;
+                            let prefix = email.substring(0, email.lastIndexOf("@"));
+                            let postfix= email.substring(email .lastIndexOf("@"));
+                            for(var i=0; i<prefix.length; i++){
+                                    if(i == 0 || i == prefix.length - 1 || i == 1 || i == prefix.length - 2) {
+                                        
+                                        maskid = maskid + prefix[i].toString();
+                                    }
+                                    else {
+                                        maskid = maskid + "*";
+                                    }
                                 }
-                                else {
-                                    maskid = maskid + "*";
-                                }
-                            }
-                        this.setState({maskEmail : maskid + postfix},()=>{});
-                   //email masking ends
-              //adding delay for animation effect
-              setTimeout(() => {
-                this.setState({token:res.data.token});
-                this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
-                this.setState({onOtpscreen:true}, ()=>{
-                    this.setState({onSuccess : false},()=>{})
+                            this.setState({maskEmail : maskid + postfix},()=>{});
+                       //email masking ends
+                  //adding delay for animation effect
+                  setTimeout(() => {
+                    this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
+                    this.setState({validEmail : true},()=>{});
+                    this.setState({onOtpscreen:true}, ()=>{
+                        this.setState({onSuccess : false},()=>{})
+                    });
+                  }, 2000);
                 });
-              }, 2000);
-            });
-            
-        },
-        (err) => {
-                   this.setState({isLoader : false},()=>{});
-                   this.setState({errors:err.data});
-                   this.setState({onFail : true},()=>{})
                 
-                }
-    );
-    
+            },
+            (err) => {
+                       this.setState({isLoader : false},()=>{});
+                       this.setState({errors:err.data});
+                       this.setState({onFail : true},()=>{})
+                    
+                    }
+        );
+       
+    }
+    //For otp screen
+    if(this.state.onOtpscreen==true){
+      this.props.otpCheck(this.state)
+    }
+    //Else disable submit button
+    else{
+        this.setState({validEmail : false},()=>{});
+    }
     
    }
     
@@ -139,7 +155,7 @@ class SignIn extends React.Component {
                     </div>
                 <div className="widget__message">
                     <p >{this.state.onOtpscreen == false ? 'Please identify yourself!':'You are almost done! One more step'}</p>
-                    <ProgressBar
+    <ProgressBar
         percent={this.state.onOtpscreen == true ? 50 : 0}
         filledBackground="linear-gradient(to right, #fefb72, #f0bb31)"
       >
@@ -177,8 +193,8 @@ class SignIn extends React.Component {
                 <ReactCardFlip isFlipped={this.state.isFlipped} 
                 flipSpeedBackToFront={2}
                 flipSpeedFrontToBack={2}>
-                <SignInInputControls key="front" signInFirstPage={this.userDetails}> </SignInInputControls>
-                <SignInOtpControls key="back" getEmailOfUser={this.state.maskEmail}></SignInOtpControls>
+                <SignInInputControls key="front" signInFirstPage={this.userDetails}> </SignInInputControls> 
+                <SignInOtpControls key="back" getEmailOfUser={this.state.maskEmail} data={this.otpDetails}></SignInOtpControls>
                 
                 </ReactCardFlip>
                 <div className ="widget-button">
@@ -231,4 +247,6 @@ class SignIn extends React.Component {
     }
 }
 
-export default connect(null,{login})(SignIn);
+
+
+export default connect(null,{login,emailCheck,otpCheck})(SignIn);
