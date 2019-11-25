@@ -51,6 +51,9 @@ export const emailCheck = (emailData = { email: ''}) =>{
            method: 'post',
            data: email
           
+        }).then(result => {
+         return result;
+            
         });
         
    };

@@ -3,7 +3,7 @@ import CryptoJS from 'crypto-js';
 const axiosInstance = axios.create({
     baseURL: 'localhost:8080'
   })
-  let tokenInfo ={} 
+let tokenInfo = {};
 
 axiosInstance.interceptors.request.use(config => {
     // perform a task before the request is sent
@@ -16,7 +16,7 @@ axiosInstance.interceptors.request.use(config => {
                     'x-csrf-token': tokenInfo.csrfToken,
                     'Content-Type': 'application/json'
                  }
-         config.headers = headers;
+        config.headers = headers;
     }
 
     function generateChecksum(str){
@@ -89,10 +89,10 @@ axiosInstance.interceptors.request.use(config => {
             pathParam = urlArray[1];  // ts=m&orgId=NPCI&loginUser=A
         }
         
-        var checkSumOfPathParam = 0;
+        let checkSumOfPathParam = 0;
         
         if(pathParam != null){
-            var splittedPathParam = pathParam.split("&");
+            let splittedPathParam = pathParam.split("&");
             splittedPathParam.forEach(function(entry) {
                 if(!entry.includes("ts"))
                     checkSumOfPathParam =  checkSumOfPathParam + parseInt(generateChecksum(entry));
@@ -117,7 +117,7 @@ axiosInstance.interceptors.request.use(config => {
             checkSumOfPathParam = checkSumOfPathParam+ checkSumOfOptionalPathParam;
         }
                             
-        var myJSON
+        let myJSON
         if(typeof config.data === "string"){
             myJSON = config.data;
         } else if("[object FormData]" == config.data.toString()){

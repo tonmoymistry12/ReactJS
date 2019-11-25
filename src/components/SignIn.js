@@ -12,6 +12,7 @@ import WelcomePage from './WelcomePage';
 import { ProgressBar, Step } from "react-step-progress-bar";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import auth from './auth';
 
 class SignIn extends React.Component {
    
@@ -121,7 +122,20 @@ class SignIn extends React.Component {
     }
     //For otp screen
     if(this.state.onOtpscreen==true){
+      debugger;
       this.props.otpCheck(this.state)
+      .then(
+        (res)=> {
+          auth.login(()=>{
+            this.props.history.push("/landingPage");
+          });
+          
+        },
+        (err) => {
+                  
+            alert("login failed")    
+                }
+    );
     }
     //Else disable submit button
     else{
