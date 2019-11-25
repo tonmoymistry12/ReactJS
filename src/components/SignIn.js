@@ -122,7 +122,6 @@ class SignIn extends React.Component {
     }
     //For otp screen
     if(this.state.onOtpscreen==true){
-      debugger;
       this.props.otpCheck(this.state)
       .then(
         (res)=> {

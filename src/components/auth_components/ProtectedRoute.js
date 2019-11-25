@@ -4,12 +4,17 @@ import auth from '../auth'
 
 
 export const  ProtectedRoute = ({component: Component, ...rest}) => {
+    //back button history clear
+    window.addEventListener('popstate', function (event)
+     {
+        history.pushState(null, document.title, location.href);
+     });
+     
     return (
         <Route
         {...rest}
         render={ props => {
             if(auth.isAuthenticated() ){
-                alert(auth.isAuthenticated())
                 return <Component {...props} />;
             }
             else {

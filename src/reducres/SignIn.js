@@ -1,7 +1,7 @@
 //const loginReducerDefaultState = [];
  
 export default (state, action) => {
-    debugger;
+
     switch (action.type) {
        
         case 'LOGIN_PASSWORD':
