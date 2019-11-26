@@ -13,6 +13,7 @@ import { ProgressBar, Step } from "react-step-progress-bar";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import auth from './auth';
+import BackboxAnimation from './BackBoxAnimation';
 
 class SignIn extends React.Component {
    
@@ -147,9 +148,9 @@ class SignIn extends React.Component {
        return (
            
            <div  ref={ref => this.el = ref}>
-          
            
-       
+           
+           
             <SlidingPane
             className='slidingpanelforsignin '
             overlayClassName='some-custom-overlay-class'
@@ -159,6 +160,7 @@ class SignIn extends React.Component {
                 // triggered on "<" on left top click or on outside click
                 this.setState({ isPaneOpen: false });
             } }>
+            
             <div>
             <div className = "widget_container">
                 <div className="widget">
@@ -247,7 +249,9 @@ class SignIn extends React.Component {
                 </div>
             
             </div>   
+            <BackboxAnimation></BackboxAnimation>  
         </SlidingPane>
+        
            <WelcomePage></WelcomePage>
            <div className="startbuttonDiv">
            <button className="button getStarted icon" onClick={() => this.setState({ isPaneOpen: true })}><span>Get Started!</span></button>
