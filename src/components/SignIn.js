@@ -15,6 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import auth from './auth';
 import BackboxAnimation from './BackBoxAnimation';
 import { ToastContainer, Zoom } from "react-toastify";
+import { toast } from 'react-toastify';
 
 class SignIn extends React.Component {
    
@@ -85,7 +86,8 @@ class SignIn extends React.Component {
               
                 this.setState({isLoader : false},()=>{});
                 this.setState({onSuccess : true},()=>{
-                    this.props.emailCheck(this.state.userName);
+                toast.success(`SUCCESS: Check your email for OTP. Please note that the new OTP will expire after 180 seconds.`);  
+                this.props.emailCheck(this.state.userName);
                     //code for email masking
                       //code for email masking start// 
                             let maskid ="";
@@ -118,6 +120,10 @@ class SignIn extends React.Component {
                        this.setState({isLoader : false},()=>{});
                        this.setState({errors:err.data});
                        this.setState({onFail : true},()=>{})
+                    
+                       toast.error(err.response.data.error+": "+err.response.data.message,{
+                        className: 'toastOnfail'
+                        });
                     
                     }
         );
@@ -258,7 +264,7 @@ class SignIn extends React.Component {
            <div className="startbuttonDiv">
            <button className="button getStarted icon" onClick={() => this.setState({ isPaneOpen: true })}><span>Get Started!</span></button>
            </div>
-           <ToastContainer autoClose={5000} transition={Zoom} />
+           <ToastContainer autoClose={10000} transition={Zoom} />
            </div>
             
         );
