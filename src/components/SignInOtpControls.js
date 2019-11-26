@@ -23,7 +23,7 @@ import OtpInput from "react-otp-input";
     render() {
         return (
             <form className="add-option">
-            <p className="otpSuccessMsg">An OTP has been sent to your email id:  {this.props.getEmailOfUser}. <br/>Please enter it below.</p>
+            <p className="otpSuccessMsg">An OTP has been sent to your email id:  <span className="email_text">{this.props.getEmailOfUser}.</span><br/>Please enter it below.</p>
             <div className="otp-input">
             <OtpInput
                 onChange={this.handleChange}

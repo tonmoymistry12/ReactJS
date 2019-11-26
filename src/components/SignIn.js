@@ -250,7 +250,7 @@ class SignIn extends React.Component {
         </SlidingPane>
            <WelcomePage></WelcomePage>
            <div className="startbuttonDiv">
-           <button className="button getStarted" onClick={() => this.setState({ isPaneOpen: true })}><span>Get Started!</span></button>
+           <button className="button getStarted icon" onClick={() => this.setState({ isPaneOpen: true })}><span>Get Started!</span></button>
            </div>
            
            </div>
