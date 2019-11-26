@@ -1,4 +1,5 @@
 import axiosInstance from '../axios/axios';
+import { toast } from 'react-toastify';
 import { sha256, sha224 } from 'js-sha256';
 const _signin = (login) => ({
     type: 'LOGIN_PASSWORD',
@@ -23,6 +24,7 @@ export const login = (loginData = {
                 'Content-Type': 'application/json'
             }
          }).then(result => {
+            toast.success(`SUCCESS: Check your email for OTP. Please note that the new OTP will expire after 180 seconds.`);
             let objectName = {
                 headers : result.headers
             }
