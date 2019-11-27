@@ -10,7 +10,7 @@ import SignInInputControls from './SignInInputControls';
 import SignInOtpControls from './SignInOtpControls';
 import WelcomePage from './WelcomePage';
 import { ProgressBar, Step } from "react-step-progress-bar";
-import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
+import { faCircleNotch, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import auth from './auth';
 import BackboxAnimation from './BackBoxAnimation';
@@ -35,7 +35,9 @@ class SignIn extends React.Component {
         isLoader:false,
         onSuccess : false,
         onFail: false,
-        maskEmail: ''
+        maskEmail: '',
+        onLoggedin: false,
+        progress:''
         };
       this.onSubmit = this.onSubmit.bind(this); 
       this.userDetails = this.userDetails.bind(this);
@@ -83,7 +85,7 @@ class SignIn extends React.Component {
         this.setState({validEmail : false},()=>{});
         this.props.login(this.state).then(
             (res)=> {
-              
+                this.setState({progress : 50},()=>{}); 
                 this.setState({isLoader : false},()=>{});
                 this.setState({onSuccess : true},()=>{
                 toast.success(`SUCCESS: Check your email for OTP. Please note that the new OTP will expire after 180 seconds.`);  
@@ -110,6 +112,7 @@ class SignIn extends React.Component {
                     this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
                     this.setState({validEmail : true},()=>{});
                     this.setState({onOtpscreen:true}, ()=>{
+                       
                         this.setState({onSuccess : false},()=>{})
                     });
                   }, 2000);
@@ -134,20 +137,27 @@ class SignIn extends React.Component {
       this.props.otpCheck(this.state)
       .then(
         (res)=> {
-          auth.login(()=>{
-            this.props.history.push("/landingPage");
-          });
+          
+          this.setState({onLoggedin : true},()=>{});
+          this.setState({progress : 100},()=>{});
+          toast.success("Login Successful");
+          setTimeout(()=>{
+            auth.login(()=>{
+              this.props.history.push("/landingPage");
+             });
+          },2000)
           
         },
         (err) => {
-                  
-            alert("login failed")    
-                }
-    );
+                  debugger;
+                  toast.error(err.response.data.error+": "+err.response.data.message,{
+                    className: 'toastOnfail'
+                    });    
+                });
     }
     //Else disable submit button
     else{
-        this.setState({validEmail : false},()=>{});
+       // this.setState({validEmail : false},()=>{});
     }
     
    }
@@ -177,9 +187,13 @@ class SignIn extends React.Component {
                         <h3 className="widget-header__title">MEMBER LOGIN!</h3>
                     </div>
                 <div className="widget__message">
-                    <p >{this.state.onOtpscreen == false ? 'Please identify yourself!':'You are almost done! One more step'}</p>
+                    <p className={this.state.onLoggedin == false ? 'show' : 'hidden'}>{this.state.onOtpscreen == false ? 'Please identify yourself!':'You are almost done! One more step'}</p>
+                    <p className={this.state.onLoggedin == true ? 'show' : 'hidden'}>You have successfully logged in.&nbsp;&nbsp;<FontAwesomeIcon
+                    className="thumbsUp"  
+                    icon={faThumbsUp} 
+                   /></p>
     <ProgressBar
-        percent={this.state.onOtpscreen == true ? 50 : 0}
+        percent={this.state.progress}
         filledBackground="linear-gradient(to right, #fefb72, #f0bb31)"
       >
         <Step transition="scale">
