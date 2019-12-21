@@ -3,10 +3,11 @@ import {NavLink } from 'react-router-dom';
 
 const Header = (props) => (
     <div className="header">
-    <div className="container">
+    <div className="header_content">
+    <img className="logo" alt="Foundry" src="/images/new_logo.svg"></img>
+    <img className="hanging_img swingimage" alt="fraud score logo" src="/images/rs_score.png"></img>
     <h1 className="header__title">{props.title}<sup>{props.sup}</sup></h1>
     <h2 className="header__subtitle">{props.subtitle} </h2>
-   
     </div>
     </div>
 );

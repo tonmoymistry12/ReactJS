@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import OtpInput from "react-otp-input";
 
  class SignInOtpControls extends Component {   
+   
     constructor(props) {
         super(props);
         this.state = {

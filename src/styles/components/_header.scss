@@ -1,23 +1,55 @@
 .header {
-    //background: #000000a8;
-    color:white;
-    padding: $m-size 0;
+    color: white;
+    padding: 0.5rem 0;
+    height: 5.0rem;
 }
 
 .header__title {
     font-size: $l-size;
     margin: 0;
     text-align: center;
+    padding-top: 1rem;
 }
+.header_content{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+.hanging_img {
+    position: absolute;
+    width: 12rem;
+    right: 2.6rem;
+    top: 0.1rem;
+    
+  }
 
 .header__subtitle {
     color: #fff;
     font-size: $m-size;
     font-weight: 500;
-    margin: 5px;
+    margin: 0.5rem;
     text-align: center;
 }
 
 @media (min-width: $desktop-breakpoint){
     
+}
+
+@-webkit-keyframes swinging{
+    0%{-webkit-transform: rotate(10deg);}
+    50%{-webkit-transform: rotate(-5deg)}
+    100%{-webkit-transform: rotate(0deg);}
+}
+ 
+@keyframes swinging{
+    0%{transform: rotate(10deg);}
+    50%{transform: rotate(-5deg)}
+    100%{transform: rotate(0deg);}
+}
+ 
+.swingimage{
+    -webkit-transform-origin: 50% 0;
+    transform-origin: 50% 0;
+    -webkit-animation: swinging 3.5s ease-in-out forwards;
+    animation: swinging 3.5s ease-in-out forwards ;
 }

@@ -16,6 +16,7 @@ import auth from './auth';
 import BackboxAnimation from './BackBoxAnimation';
 import { ToastContainer, Zoom } from "react-toastify";
 import { toast } from 'react-toastify';
+import Header from '../components/Header';
 
 class SignIn extends React.Component {
    
@@ -37,7 +38,7 @@ class SignIn extends React.Component {
         onFail: false,
         maskEmail: '',
         onLoggedin: false,
-        progress:''
+        progress:0
         };
       this.onSubmit = this.onSubmit.bind(this); 
       this.userDetails = this.userDetails.bind(this);
@@ -143,7 +144,7 @@ class SignIn extends React.Component {
           toast.success("Login Successful");
           setTimeout(()=>{
             auth.login(()=>{
-              this.props.history.push("/landingPage");
+              this.props.history.push("/casemanagement/mycases");
              });
           },2000)
           
@@ -166,10 +167,8 @@ class SignIn extends React.Component {
        return (
            
            <div  ref={ref => this.el = ref}>
-           
-           
-           
-            <SlidingPane
+           <Header></Header>
+           <SlidingPane
             className='slidingpanelforsignin '
             overlayClassName='some-custom-overlay-class'
             isOpen={ this.state.isPaneOpen }
@@ -278,7 +277,7 @@ class SignIn extends React.Component {
            <div className="startbuttonDiv">
            <button className="button getStarted icon" onClick={() => this.setState({ isPaneOpen: true })}><span>Get Started!</span></button>
            </div>
-           <ToastContainer autoClose={10000} transition={Zoom} />
+           <ToastContainer autoClose={8000} transition={Zoom} />
            </div>
             
         );

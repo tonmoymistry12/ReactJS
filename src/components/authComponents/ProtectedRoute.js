@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import auth from '../auth'
+import auth from '../auth';
+
 
 
 export const  ProtectedRoute = ({component: Component, ...rest}) => {
@@ -11,14 +12,26 @@ export const  ProtectedRoute = ({component: Component, ...rest}) => {
      });
      
     return (
+        <div className="component_wrapper">
+        
         <Route
         {...rest}
         render={ props => {
             if(auth.isAuthenticated() ){
-                return <Component {...props} />;
+                debugger;
+                return (
+                    <div >
+                    
+                    <div >
+                    <Component  {...props} /></div>
+                    
+                    </div>
+                    
+                    );
             }
             else {
               return (
+                
                   <Redirect
                            to={{
                                pathname: "/",
@@ -32,5 +45,7 @@ export const  ProtectedRoute = ({component: Component, ...rest}) => {
 
         }
         />
+        
+    </div>
     )
 }
