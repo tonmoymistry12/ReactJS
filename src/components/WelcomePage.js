@@ -2,8 +2,10 @@ import React from 'react';
 import { faFire } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+
 const WelcomePage = () => (
  <div className="desc_wrapper">
+ 
 <div className="welcome_decription">
   <h2 className="animate-reveal animate-first set_margin_fromTop">RS IntelliEdge<sup>TM</sup></h2>
   <p className ="animate-reveal animate-second">RS IntelliEdge<sup>TM</sup> is a <b>multi-channel</b> fraud
@@ -26,6 +28,7 @@ const WelcomePage = () => (
 <h2 className="animate-reveal animate-third frd-src">Fraud Scoring Strategy</h2>
   
 </div>
+
 </div>   
 );
 

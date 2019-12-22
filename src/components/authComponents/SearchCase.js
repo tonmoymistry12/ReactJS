@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { Component } from 'react';
+import Button from '@material-ui/core/Button';
 
-export default function SearchCase() {
-    return (
-        <div>
-        <h1>im in my Search case page</h1>
-        </div>
-    )
+export default class SearchCase extends Component {
+    render() {
+        return (
+            <div style={{ maxWidth: "100%" }}>
+            <Button variant="contained" color="primary"> Hello World</Button>
+      </div>
+        )
+    }
 }
