@@ -14,8 +14,8 @@ const AppRouter = () =>(
        <Switch>
         <Route path = "/" component = {SignIn}  exact={true}/>
         <Route path = "/help" component = {HelpPage} />
-        <ProtectedRoute  component = {landingPage} />
-        <Route component = {NotFound} />
+        <ProtectedRoute  path ="/casemanagement/mycases" component = {landingPage} />
+        
         </Switch>
     </div>
 </BrowserRouter>

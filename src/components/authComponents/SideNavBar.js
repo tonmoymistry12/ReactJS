@@ -1,14 +1,18 @@
 import React, { PureComponent } from 'react';
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
-import { Route, BrowserRouter, Switch } from 'react-router-dom';
-import LandingPage from './LandingPage'
+import { Route, BrowserRouter, Switch, Link } from 'react-router-dom';
+import LandingPage from './LandingPage';
+import SignIn from '../SignIn';
 import MyCases from './MyCases';
 import SearchCase from './SearchCase';
+import Logout from './logout';
+import NotFound from '../NotFound';
 import { faHome, faChartBar, faUser, faTasks, faList, faBriefcase, faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon,  } from "@fortawesome/react-fontawesome";
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import styled from 'styled-components';
-
+import { formatMs } from '@material-ui/core';
+import {ProtectedRoute} from '../../components/authComponents/ProtectedRoute'
 
 export default class extends PureComponent {
     state = {
@@ -283,15 +287,18 @@ export default class extends PureComponent {
                 <img src="/images/icons/logout.svg"></img>
                 </NavIcon>
                 <NavText >
-                    <span className="logOut">SIGN OUT</span>
+                <span className="logOut">SIGN OUT</span>
                 </NavText>
             </NavItem>
      </SideNav.Nav>
      
     </SideNav>
     <div className="wrapper_route">
-    <Route path="/casemanagement/searchcase" exact component={props => <SearchCase />} />
-    <Route path="/casemanagement/mycases" exact component={props => <MyCases />} />
+    
+    <Route path="/casemanagement/searchcase"  component={props => <SearchCase />} />
+    <Route path="/casemanagement/mycases"  component={props => <MyCases />} />
+    <Route path="/logout" exact component={props => <Logout />} />
+    
     </div>
     
      </div>           

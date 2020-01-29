@@ -1,10 +1,11 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import auth from '../auth';
-
+import SideNav from './SideNavBar';
 
 
 export const  ProtectedRoute = ({component: Component, ...rest}) => {
+
     //back button history clear
     window.addEventListener('popstate', function (event)
      {
@@ -18,15 +19,10 @@ export const  ProtectedRoute = ({component: Component, ...rest}) => {
         {...rest}
         render={ props => {
             if(auth.isAuthenticated() ){
-                debugger;
                 return (
                     <div >
-                    
-                    <div >
-                    <Component  {...props} /></div>
-                    
+                    <Component  {...props} />
                     </div>
-                    
                     );
             }
             else {

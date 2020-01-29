@@ -1,11 +1,13 @@
-import React from 'react'
+import React from 'react';
 import SideNav from './SideNavBar';
+import { HashRouter } from "react-router-dom";
 export default function LandingPage() {
     
-    alert("in landing page")
     return (
         <div>
+        <HashRouter>
         <SideNav> </SideNav>
+        </HashRouter>
         </div>
     )
 }

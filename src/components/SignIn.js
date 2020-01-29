@@ -135,15 +135,20 @@ class SignIn extends React.Component {
     }
     //For otp screen
     if(this.state.onOtpscreen==true){
+      this.setState({isLoader : true},()=>{});
       this.props.otpCheck(this.state)
+      
       .then(
+       
         (res)=> {
-          
+          this.setState({isLoader : false},()=>{});
+          this.setState({onSuccess : true},()=>{})
           this.setState({onLoggedin : true},()=>{});
           this.setState({progress : 100},()=>{});
           toast.success("Login Successful");
           setTimeout(()=>{
             auth.login(()=>{
+              
               this.props.history.push("/casemanagement/mycases");
              });
           },2000)

@@ -29,6 +29,10 @@ body {
  button, input, optgroup, select, textarea 
  {
     font-family: 'Lato',sans-serif;
+    font-size: 1.4rem ;
+}
+.MTablePaginationInner-root-212{
+  margin: 0 10px;
 }
 button:disabled,
 button[disabled]{
@@ -82,8 +86,10 @@ button[disabled]{
   .component_wrapper {
     position: relative; 
     height: calc(100vh);
-    background: linear-gradient(0deg, #d2d2d2, rgba(255, 255, 255, 0.18)), url(/images/background_withDot.png);
+    //background: #fff;
+    background: url(/images/background9.jpg);
     background-repeat: repeat;
+    padding: 0 0.8rem;
   } 
   .line_color{
     background: #bfbbbb;
@@ -92,7 +98,7 @@ button[disabled]{
     clear: both;
     position: relative;
     margin: .8rem 0;
-    background-color: #c1c1c1;
+    background-color: #626263;
     height: 1px;
   }
   .ezeJXt {
@@ -197,7 +203,8 @@ button[disabled]{
 }
 
 .wrapper_route{
-  margin-left:65px;
+  margin-left: 61px;
+  
 }
 
     /* width */
